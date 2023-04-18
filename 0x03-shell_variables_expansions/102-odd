@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -n '' | grep -E '(^|[^0-9]):([02468][^0-9]|10*$)' | cut -d: -f2-
+perl -lne 'print if $. % 2 == 1'
