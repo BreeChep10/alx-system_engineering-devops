@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "obase=16" | bd <<< "$DECIMAL"
+echo "obase=16" | bc <<< "$DECIMAL"
