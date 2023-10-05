@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+# This Scrip pings an IP address passed as an argument.
