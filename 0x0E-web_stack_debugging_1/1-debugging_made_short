@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
-# Counfigures an Nginx service to listen on port
-
-#creates a symbolic link between the nginx configuration
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-
-#restart nginx
+# Change port in Nginx to 8080/80
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
 sudo service nginx restart
-
-#terminate the first nginx process
-pkill "$(pgrep 'nginx' | head -l)"
+kill -9 "$(cat /var/run/nginx.pid)"
