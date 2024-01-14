@@ -8,4 +8,4 @@ ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
 
 #terminate the first nginx process
-kill "$(pgrep 'nginx' | head -l)"
+pkill "$(pgrep 'nginx' | head -l)"
