@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Counfigures an Nginx service to listen on port
+
+#creates a symbolic link between the nginx configuration
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+#restart nginx
+sudo service nginx restart
+
+#terminate the first nginx process
+kill "$(pgrep 'nginx' | head -l)"
