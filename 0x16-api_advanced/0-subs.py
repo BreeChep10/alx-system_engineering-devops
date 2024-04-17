@@ -1,19 +1,21 @@
 #!/usr/bin/python3
-"""returns the number of subscribers"""
-
+"""Counts number of subs"""
 import requests
 
 
-def number_of_subscribers(subreddit):
-    """Returns the number of subscribers"""
-    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) \
-        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 \
-            Mobile Safari/537.36"
-    }
-    response = requests.get(url, headers=headers, allow_redirects=False)
-    if response.status_code == 404:
+def number_of_subscribers(subreddit=None):
+    """Function to retrieve the number of subscribers for a given subreddit"""
+
+    if not subreddit or not isinstance(subreddit, str):
         return 0
-    results = response.json().get("data")
-    return results.get("subscribers")
+
+    try:
+        r = requests.get('http://www.reddit.com/r/{}/about.json'.
+                         format(subreddit),
+                         headers={'User-Agent': 'mycoolapp/1.0'})
+        r.raise_for_status()
+        data = r.json()
+        subscribers = data.get("data", {}).get("subscribers", 0)
+        return subscribers
+    except requests.RequestException as e:
+        return 0
